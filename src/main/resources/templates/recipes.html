@@ -11,9 +11,8 @@
     <th>ID</th>
     <th>Name</th>
     <th>Description</th>
-    <th>Ingredients</th>
-    <th>Category</th>
-    <th>Tags</th>
+    <th>Ingredient</th>
+    <th>Delivery</th>
   </tr>
   </thead>
   <tbody>
@@ -21,11 +20,8 @@
     <td th:text="${recipe.id}"></td>
     <td th:text="${recipe.name}"></td>
     <td th:text="${recipe.description}"></td>
-    <td th:text="${recipe.ingredients}"></td>
-    <td th:text="${recipe.categoryName}"></td>
-    <td>
-      <span th:each="tagTitle : ${recipe.tagTitles}" th:text="${tagTitle} + ', '"></span>
-    </td>
+    <td th:text="${recipe.ingredient}"></td>
+    <td th:text="${recipe.delivery} ? 'Yes' : 'No'"></td>
   </tr>
   </tbody>
 </table>

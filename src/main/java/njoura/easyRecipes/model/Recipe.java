@@ -26,9 +26,11 @@ public class Recipe {
 
     private String ingredient;
 
+    private Boolean delivery;
+
     // Define the relationship between Recipe and Category
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Category category;
 
     // Define the relationship between Recipe and Tag
@@ -39,12 +41,5 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private Set<Tag> tags = new HashSet<>();
-
-    // Add categoryName as a derived property using @Formula
-    @Formula("(SELECT c.name FROM Categories c WHERE c.id = category_id)")
-    private String categoryName;
-
-    // Add tagTitles as a derived property using @Formula
-    @Formula("(SELECT GROUP_CONCAT(t.title) FROM Tags t JOIN recipe_tags rt ON t.id = rt.tag_id WHERE rt.recipe_id = id)")
-    private String tagTitles;
 }
+

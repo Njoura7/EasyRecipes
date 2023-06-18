@@ -12,52 +12,44 @@
     <label for="description">Description:</label>
     <input type="text" id="description" name="description" required>
 
-    <label for="ingredients">Ingredients:</label>
-    <input type="text" id="ingredients" name="ingredients" required>
+    <label for="ingredient">Ingredient:</label>
+    <input type="text" id="ingredient" name="ingredient" required>
 
-    <p>Categories:</p>
-    <input type="radio" id="breakfast" name="category" value="breakfast">
-    <label for="breakfast">Breakfast</label>
-    <input type="radio" id="lunch" name="category" value="lunch">
-    <label for="lunch">Lunch</label>
-    <input type="radio" id="dinner" name="category" value="dinner">
-    <label for="dinner">Dinner</label>
-
-    <p>Tags:</p>
-    <input type="checkbox" id="spicy" name="tags" value="spicy">
-    <label for="spicy">Spicy</label>
-    <!-- Add more checkboxes for other tags -->
+    <label for="delivery">Delivery:</label>
+    <input type="checkbox" id="delivery" name="delivery">
 
     <button type="submit">Submit</button>
 </form>
 
 <script>
-        document.getElementById("add-recipe-form").addEventListener("submit", function(event) {
-            event.preventDefault();
+    document.getElementById("add-recipe-form").addEventListener("submit", function(event) {
+        event.preventDefault();
 
-            const formData = new FormData(event.target);
-            const recipeData = Object.fromEntries(formData.entries());
+        const formData = new FormData(event.target);
+        const recipeData = Object.fromEntries(formData.entries());
 
-            fetch("/recipes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(recipeData)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("Recipe added successfully!");
-                    window.location.href = "/view-recipes";
-                } else {
-                    alert("Error adding recipe. Please try again.");
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
+        recipeData.delivery = recipeData.delivery === "on";
+
+        fetch("/recipes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(recipeData)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Recipe added successfully!");
+                window.location.href = "/view-recipes";
+            } else {
                 alert("Error adding recipe. Please try again.");
-            });
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Error adding recipe. Please try again.");
         });
-    </script>
+    });
+</script>
 </body>
 </html>
