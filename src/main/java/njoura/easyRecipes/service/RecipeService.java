@@ -6,32 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
-    private final RecipeRepository recipeRepository;
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
-    }
-    public Recipe addRecipe(Recipe recipe) {
-        return recipeRepository.save(recipe);
-    }
-    public List<Recipe> getAllRecipes() {
+    private RecipeRepository recipeRepository;
+
+    public List<Recipe> findAll() {
         return recipeRepository.findAll();
     }
 
-    public Recipe getRecipeById(Long id) {
-        return recipeRepository.findById(id).orElse(null);
+    public Optional<Recipe> findById(Long id) {
+        return recipeRepository.findById(id);
     }
 
-
-    public Recipe updateRecipe(Recipe recipe) {
+    public Recipe save(Recipe recipe) {
         return recipeRepository.save(recipe);
     }
 
-    public void deleteRecipe(Long id) {
+    public void deleteById(Long id) {
         recipeRepository.deleteById(id);
     }
 }

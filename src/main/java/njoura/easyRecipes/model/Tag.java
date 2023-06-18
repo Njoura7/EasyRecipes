@@ -8,10 +8,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Tags")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 @ToString
 public class Tag {
     @Id
@@ -19,7 +19,4 @@ public class Tag {
     private Long id;
 
     private String title;
-
-    @ManyToMany(mappedBy = "tags")
-    private Set<Recipe> recipes = new HashSet<>();
 }

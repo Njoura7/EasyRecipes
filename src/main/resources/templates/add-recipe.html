@@ -1,32 +1,63 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Recipe</title>
 </head>
 <body>
 <h1>Add Recipe</h1>
-<form action="/addRecipe" method="POST">
+<form th:action="@{/recipes}" method="post" id="add-recipe-form">
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name"><br>
-
-    <label for="category">Category:</label>
-    <input type="text" id="category" name="category"><br>
+    <input type="text" id="name" name="name" required>
 
     <label for="description">Description:</label>
-    <input type="text" id="description" name="description"><br>
+    <input type="text" id="description" name="description" required>
 
-    <label for="ingredientNames">Ingredient Names:</label>
-    <input type="text" id="ingredientNames" name="ingredientNames"><br>
+    <label for="ingredients">Ingredients:</label>
+    <input type="text" id="ingredients" name="ingredients" required>
 
-    <label for="ingredientQuantities">Ingredient Quantities:</label>
-    <input type="text" id="ingredientQuantities" name="ingredientQuantities"><br>
+    <p>Categories:</p>
+    <input type="radio" id="breakfast" name="category" value="breakfast">
+    <label for="breakfast">Breakfast</label>
+    <input type="radio" id="lunch" name="category" value="lunch">
+    <label for="lunch">Lunch</label>
+    <input type="radio" id="dinner" name="category" value="dinner">
+    <label for="dinner">Dinner</label>
 
-    <label for="tags">Tags:</label>
-    <input type="text" id="tags" name="tags"><br>
+    <p>Tags:</p>
+    <input type="checkbox" id="spicy" name="tags" value="spicy">
+    <label for="spicy">Spicy</label>
+    <!-- Add more checkboxes for other tags -->
 
-    <input type="submit" value="Add" formaction="/view-recipe" formmethod="post" formtarget="_blank">
+    <button type="submit">Submit</button>
 </form>
-<br>
-<button onclick="location.href='/view-recipes'">View Recipes</button>
+
+<script>
+        document.getElementById("add-recipe-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const recipeData = Object.fromEntries(formData.entries());
+
+            fetch("/recipes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(recipeData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Recipe added successfully!");
+                    window.location.href = "/view-recipes";
+                } else {
+                    alert("Error adding recipe. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error adding recipe. Please try again.");
+            });
+        });
+    </script>
 </body>
 </html>

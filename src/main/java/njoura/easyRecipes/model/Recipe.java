@@ -2,9 +2,11 @@ package njoura.easyRecipes.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Recipes")
@@ -22,36 +24,27 @@ public class Recipe {
 
     private String description;
 
+    private String ingredient;
+
+    // Define the relationship between Recipe and Category
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Ingredient> ingredients = new HashSet<>();
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "recipe_tags",
+    // Define the relationship between Recipe and Tag
+    @ManyToMany
+    @JoinTable(
+            name = "recipe_tags",
             joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
     private Set<Tag> tags = new HashSet<>();
 
-    public void addIngredient(Ingredient ingredient) {
-        ingredients.add(ingredient);
-        ingredient.setRecipe(this);
-    }
+    // Add categoryName as a derived property using @Formula
+    @Formula("(SELECT c.name FROM Categories c WHERE c.id = category_id)")
+    private String categoryName;
 
-    public void removeIngredient(Ingredient ingredient) {
-        ingredients.remove(ingredient);
-        ingredient.setRecipe(null);
-    }
-
-    public void addTag(Tag tag) {
-        tags.add(tag);
-        tag.getRecipes().add(this);
-    }
-
-    public void removeTag(Tag tag) {
-        tags.remove(tag);
-        tag.getRecipes().remove(this);
-    }
+    // Add tagTitles as a derived property using @Formula
+    @Formula("(SELECT GROUP_CONCAT(t.title) FROM Tags t JOIN recipe_tags rt ON t.id = rt.tag_id WHERE rt.recipe_id = id)")
+    private String tagTitles;
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Welcome</title>
+  <title>Easy Recipes</title>
 </head>
 <body>
 <h1>Welcome to Easy Recipes</h1>
-<button onclick="location.href='/add-recipe'">Add Recipe</button>
-<button onclick="location.href='/view-recipes'">View Recipes</button>
+<a th:href="@{/add-recipe}">Add Recipe</a>
+<a th:href="@{/view-recipes}">View Recipes</a>
 </body>
 </html>
