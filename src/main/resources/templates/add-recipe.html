@@ -1,0 +1,32 @@
+\<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Recipe</title>
+</head>
+<body>
+<h1>Add Recipe</h1>
+<form action="/addRecipe" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br>
+
+    <label for="category">Category:</label>
+    <input type="text" id="category" name="category"><br>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description"><br>
+
+    <label for="ingredientNames">Ingredient Names:</label>
+    <input type="text" id="ingredientNames" name="ingredientNames"><br>
+
+    <label for="ingredientQuantities">Ingredient Quantities:</label>
+    <input type="text" id="ingredientQuantities" name="ingredientQuantities"><br>
+
+    <label for="tags">Tags:</label>
+    <input type="text" id="tags" name="tags"><br>
+
+    <input type="submit" value="Add">
+</form>
+<br>
+<button onclick="location.href='/view-recipes'">View Recipes</button>
+</body>
+</html>

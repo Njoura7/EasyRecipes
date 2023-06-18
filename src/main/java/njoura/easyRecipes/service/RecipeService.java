@@ -15,7 +15,9 @@ public class RecipeService {
     public RecipeService(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
-
+    public Recipe addRecipe(Recipe recipe) {
+        return recipeRepository.save(recipe);
+    }
     public List<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
     }
@@ -24,9 +26,6 @@ public class RecipeService {
         return recipeRepository.findById(id).orElse(null);
     }
 
-    public Recipe createRecipe(Recipe recipe) {
-        return recipeRepository.save(recipe);
-    }
 
     public Recipe updateRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);

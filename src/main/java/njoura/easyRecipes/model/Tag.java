@@ -1,11 +1,13 @@
 package njoura.easyRecipes.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table(name="Tags")
+@Table(name = "Tags")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -18,5 +20,6 @@ public class Tag {
 
     private String title;
 
-
+    @ManyToMany(mappedBy = "tags")
+    private Set<Recipe> recipes = new HashSet<>();
 }

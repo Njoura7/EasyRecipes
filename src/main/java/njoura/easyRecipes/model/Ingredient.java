@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name="Ingredients")
+@Table(name = "Ingredients")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -19,4 +19,7 @@ public class Ingredient {
 
     private Integer quantity;
 
+    @ManyToOne
+    @JoinColumn(name = "recipe_id")
+    private Recipe recipe;
 }
