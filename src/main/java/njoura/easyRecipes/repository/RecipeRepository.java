@@ -1,6 +1,6 @@
 package njoura.easyRecipes.repository;
 
-import njoura.easyRecipes.Model.Recipe;
+import njoura.easyRecipes.model.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package njoura.easyRecipes.service;
 
-import njoura.easyRecipes.Model.Recipe;
+import njoura.easyRecipes.model.Recipe;
 import njoura.easyRecipes.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

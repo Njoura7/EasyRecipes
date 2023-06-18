@@ -1,6 +1,6 @@
 package njoura.easyRecipes.service;
 
-import njoura.easyRecipes.Model.Recipe;
+import njoura.easyRecipes.model.Recipe;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package njoura.easyRecipes.controllers;
 
-import njoura.easyRecipes.Model.Category;
-import njoura.easyRecipes.Model.Ingredient;
-import njoura.easyRecipes.Model.Recipe;
-import njoura.easyRecipes.Model.Tag;
+import njoura.easyRecipes.model.Category;
+import njoura.easyRecipes.model.Ingredient;
+import njoura.easyRecipes.model.Recipe;
+import njoura.easyRecipes.model.Tag;
 import njoura.easyRecipes.repository.CategoryRepository;
 import njoura.easyRecipes.repository.IngredientRepository;
 import njoura.easyRecipes.repository.RecipeRepository;

@@ -1,7 +1,7 @@
 package njoura.easyRecipes.controllers;
 
 import njoura.easyRecipes.service.RecipeService;
-import njoura.easyRecipes.Model.Recipe;
+import njoura.easyRecipes.model.Recipe;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
