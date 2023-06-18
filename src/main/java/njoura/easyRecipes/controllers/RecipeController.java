@@ -14,17 +14,23 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@RequestMapping("/")
 public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("recipe", new Recipe());
         return "index";
     }
 
-    @PostMapping("/addRecipe")
+    @GetMapping("/add-recipe")
+    public String showAddRecipeForm(Model model) {
+        model.addAttribute("recipe", new Recipe());
+        return "add-recipe";
+    }
+
+    @PostMapping("/add-recipe")
     public String addRecipe(@ModelAttribute("recipe") Recipe recipe,
                             @RequestParam("category") String category,
                             @RequestParam("description") String description,
@@ -51,13 +57,13 @@ public class RecipeController {
 
         recipeService.addRecipe(recipe);
 
-        return "redirect:/viewRecipes";
+        return "redirect:/view-recipes";
     }
 
-    @GetMapping("/viewRecipes")
+    @GetMapping("/view-recipes")
     public String viewRecipes(Model model) {
         List<Recipe> recipes = recipeService.getAllRecipes();
         model.addAttribute("recipes", recipes);
-        return "recipes";
+        return "view-recipes";
     }
 }
