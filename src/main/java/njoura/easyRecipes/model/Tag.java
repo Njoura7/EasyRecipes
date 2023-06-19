@@ -19,4 +19,14 @@ public class Tag {
     private Long id;
 
     private String title;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "recipe_tags",
+            joinColumns = {@JoinColumn(name = "tag_id")},
+            inverseJoinColumns = {@JoinColumn(name = "recipe_id")})
+    private Set<Recipe> recipes = new HashSet<>();
+
+    public Tag(String title) {
+        this.title = title;
+    }
 }

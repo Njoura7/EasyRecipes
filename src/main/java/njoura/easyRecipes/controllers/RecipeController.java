@@ -30,11 +30,13 @@ public class RecipeController {
         return recipeService.save(recipe);
     }
 
-    @PutMapping("/{id}")
-    public Recipe updateRecipe(@PathVariable Long id, @RequestBody Recipe recipe) {
+    @PutMapping("/update/{id}")
+    public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe recipe) {
         recipe.setId(id);
-        return recipeService.save(recipe);
+        recipeService.update(recipe);
+        return "redirect:/view-recipes";
     }
+
 
     @DeleteMapping("/{id}")
     public void deleteRecipe(@PathVariable Long id) {

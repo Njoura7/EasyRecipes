@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Update Recipe</title>
+</head>
+<body>
+<h1>Update Recipe</h1>
+<form action="/recipes/update/{id}" th:action="@{/recipes/update/{id}(id=${recipe.id})}" method="post" th:object="${recipe}">
+  <input type="hidden" name="id" th:value="${recipe.id}" />
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" th:value="${recipe.name}" required />
+  <br>
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" rows="4" cols="50" required th:text="${recipe.description}"></textarea>
+  <br>
+  <label for="ingredient">Ingredient:</label>
+  <input type="text" id="ingredient" name="ingredient" th:value="${recipe.ingredient}" required />
+  <br>
+  <label for="delivery">Delivery:</label>
+  <input type="checkbox" id="delivery" name="delivery" th:checked="${recipe.delivery}" />
+  <br>
+  <button type="submit">Update Recipe</button>
+</form>
+<a href="/view-recipes">Back to View Recipes</a>
+</body>
+</html>

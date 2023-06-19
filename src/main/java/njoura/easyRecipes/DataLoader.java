@@ -15,9 +15,9 @@ public class DataLoader {
     @Bean
     public CommandLineRunner loadCategories(CategoryRepository categoryRepository) {
         return args -> {
-            Category breakfast = new Category(1L, "breakfast");
-            Category lunch = new Category(2L, "lunch");
-            Category dinner = new Category(3L, "dinner");
+            Category breakfast = new Category("breakfast");
+            Category lunch = new Category("lunch");
+            Category dinner = new Category("dinner");
 
             categoryRepository.save(breakfast);
             categoryRepository.save(lunch);
@@ -29,14 +29,14 @@ public class DataLoader {
     @Bean
     public CommandLineRunner loadTags(TagRepository tagRepository) {
         return args -> {
-            Tag spicy = new Tag(null, "spicy");
-            Tag sweet = new Tag(null, "sweet");
-            Tag salty = new Tag(null, "salty");
-            Tag french = new Tag(null, "french");
-            Tag hungarian = new Tag(null, "hungarian");
-            Tag italian = new Tag(null, "italian");
-            Tag asian = new Tag(null, "asian");
-            Tag fastFood = new Tag(null, "fast food");
+            Tag spicy = new Tag("spicy");
+            Tag sweet = new Tag("sweet");
+            Tag salty = new Tag("salty");
+            Tag french = new Tag("french");
+            Tag hungarian = new Tag("hungarian");
+            Tag italian = new Tag("italian");
+            Tag asian = new Tag("asian");
+            Tag fastFood = new Tag("fast food");
 
             tagRepository.save(spicy);
             tagRepository.save(sweet);
@@ -49,3 +49,4 @@ public class DataLoader {
         };
     }
 }
+

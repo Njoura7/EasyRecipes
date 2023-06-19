@@ -22,6 +22,15 @@
     <td th:text="${recipe.description}"></td>
     <td th:text="${recipe.ingredient}"></td>
     <td th:text="${recipe.delivery} ? 'Yes' : 'No'"></td>
+    <td>
+      <form action="#" th:action="@{/recipes/update/} + ${recipe.id}" method="get">
+        <button type="submit">Update</button>
+      </form>
+      <form action="#" th:action="@{/recipes/delete/} + ${recipe.id}" method="post">
+        <button type="submit">Delete</button>
+      </form>
+
+    </td>
   </tr>
   </tbody>
 </table>
