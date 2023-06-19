@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -38,20 +40,14 @@ public class WebController {
         model.addAttribute("recipes", recipes);
         return "recipes";
     }
-    @GetMapping("/recipes/update/{id}")
-    public ModelAndView updateRecipe(@PathVariable Long id, Model model) {
-        Optional<Recipe> recipe = recipeService.findById(id);
-        if (recipe.isPresent()) {
-            model.addAttribute("recipe", recipe.get());
-            return new ModelAndView("update-recipe");
 
-        } else {
-            ModelAndView modelAndView = new ModelAndView("error");
-            modelAndView.setStatus(HttpStatus.NOT_FOUND);
-            modelAndView.addObject("errorMessage", "Recipe not found");
-            return modelAndView;
-        }
+    @PostMapping("/recipes/update/{id}")
+    public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe recipe) {
+        recipe.setId(id);
+        recipeService.update(recipe);
+        return "redirect:/view-recipes";
     }
+
 
     @PostMapping("/recipes/delete/{id}")
     public String deleteRecipe(@PathVariable Long id, RedirectAttributes redirectAttributes) {

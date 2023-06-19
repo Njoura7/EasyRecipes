@@ -30,7 +30,7 @@ public class RecipeController {
         return recipeService.save(recipe);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe recipe) {
         recipe.setId(id);
         recipeService.update(recipe);

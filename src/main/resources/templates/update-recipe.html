@@ -5,7 +5,8 @@
 </head>
 <body>
 <h1>Update Recipe</h1>
-<form action="/recipes/update/{id}" th:action="@{/recipes/update/{id}(id=${recipe.id})}" method="post" th:object="${recipe}">
+<form action="/update/{id}" th:action="@{/update/{id}(id=${recipe.id})}" method="post" th:object="${recipe}">
+
   <input type="hidden" name="id" th:value="${recipe.id}" />
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" th:value="${recipe.name}" required />
